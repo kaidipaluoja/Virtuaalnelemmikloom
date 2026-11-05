@@ -1,0 +1,53 @@
+# Virtuaalne lemmikloom 🐾
+
+## 1. Projekti nimi
+Minu projekti nimi on **Virtuaalne lemmikloom**.
+
+## 2. Eesmärk
+Projekti eesmärk on luua lihtne ja lõbus veebimäng, kus kasutaja saab hoolitseda oma virtuaalse lemmiklooma eest. Mäng aitab sisustada vaba aega ja õpetab, kuidas lemmiklooma eest hoolitseda.
+
+## 3. Sihtgrupp
+Mäng on mõeldud peamiselt lastele ja noortele, kellele meeldivad loomad ja arvutimängud. Mängida saavad ka kõik teised huvilised.
+
+## 4. Funktsionaalsus
+Mängus saab kasutaja:
+
+1. **Valida lemmiklooma** – näiteks kassi või koera.
+2. **Panna loomale nime** – kasutaja saab ise nime valida.
+3. **Toita lemmiklooma** – loomale saab süüa anda.
+4. **Mängida lemmikloomaga** – mängimine parandab looma tuju.
+5. **Panna lemmiklooma magama** – magamine taastab looma energia.
+6. **Vaadata looma seisundit** – näha saab looma kõhutäidet, tuju ja energiat.
+7. **Salvestada mängu** – mäng jätab looma andmed meelde.
+
+## 5. Tehnoloogiad
+Projekti tegemiseks plaanin kasutada:
+
+- **HTML** – veebilehe loomiseks.
+- **CSS** – mängu kujundamiseks.
+- **JavaScript** – mängu funktsioonide tegemiseks.
+- **LocalStorage** – mängu andmete salvestamiseks.
+- **Visual Studio Code** – koodi kirjutamiseks.
+- **GitHub** – projekti failide hoidmiseks.
+
+## 6. Teostusplaan
+1. Mõtlen välja mängu välimuse.
+2. Loon HTML-iga mängu põhilehe.
+3. Kujundan veebilehe CSS-iga.
+4. Lisan JavaScriptiga lemmiklooma valimise ja nime panemise.
+5. Lisan toitmise, mängimise ja magamise võimalused.
+6. Lisan looma seisundi näitajad.
+7. Teen mängu salvestamise võimaluse.
+8. Testin mängu ja parandan vead.
+
+## 7. Valmisoleku kriteeriumid
+Projekt on valmis, kui:
+
+- Mäng avaneb veebibrauseris.
+- Kasutaja saab valida looma ja panna talle nime.
+- Looma saab toita.
+- Loomaga saab mängida.
+- Looma saab magama panna.
+- Looma seisundi näitajad töötavad.
+- Mängu andmed salvestuvad.
+- Mäng töötab korralikult ja seda on lihtne kasutada.
