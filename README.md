@@ -49,5 +49,20 @@ Projekt on valmis, kui:
 - Lemmikloomaga saab mängida.
 - Lemmiklooma saab magama panna.
 - Looma nälja, tuju ja energia näitajad töötavad.
+- 
+## 8. Arenduse tegevuslogi
+
+Projekti arendamisel kasutan automaatset tegevuslogi.
+
+Tegevused salvestatakse faili `logi.md`.
+GitHub Actions lisab logisse tehtud koodimuudatuste
+kuupäeva, autori ja kirjelduse.
+
+Logi abil saan jälgida projekti arengut ning
+koostada hiljem päevakokkuvõtteid.
+
+Järgmiseks kohtumiseks esitan oma senise
+arendustöö ja tegevuslogi ülevaatamiseks.
+
 - Mängu andmed salvestuvad.
 - Mäng töötab ilma suuremate vigadeta ja seda on lihtne kasutada.# Virtuaalnelemmikloom
