@@ -21,3 +21,7 @@ Projekti nimi: Virtuaalne lemmikloom
 ## 25.11.2026 13:00 UTC
 Autor: kaidipaluoja
 Tegevus: logi.yml
+
+## 25.11.2026 13:02 UTC
+Autor: kaidipaluoja
+Tegevus: Update README.md
