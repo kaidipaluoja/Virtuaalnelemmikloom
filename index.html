@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minu virtuaalne lemmikloom</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff0f6;
+      text-align: center;
+      padding: 20px;
+      color: #4b3040;
+    }
+
+    .kast {
+      background: white;
+      max-width: 430px;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px #e7c9d5;
+    }
+
+    h1 { color: #d94f91; }
+
+    .loom {
+      font-size: 100px;
+      margin: 20px;
+    }
+
+    button {
+      background: #ef76ad;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover { background: #cf4f8b; }
+
+    input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .rida {
+      text-align: left;
+      margin: 16px 0;
+    }
+
+    progress {
+      width: 100%;
+      height: 22px;
+      accent-color: #ef76ad;
+    }
+
+    #teade {
+      font-weight: bold;
+      color: #b33a74;
+      min-height: 25px;
+    }
+
+    .peidetud { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="kast">
+    <h1>🐾 Virtuaalne lemmikloom</h1>
+
+    <div id="algus">
+      <h2>Vali endale loom!</h2>
+      <button onclick="vali('kass')">🐱 Kass</button>
+      <button onclick="vali('koer')">🐶 Koer</button>
+
+      <p id="valik">Valitud: kass</p>
+
+      <input id="nimi" maxlength="20"
+             placeholder="Lemmiklooma nimi">
+
+      <p>
+        <button onclick="alusta()">Alusta mängu</button>
+      </p>
+    </div>
+
+    <div id="mang" class="peidetud">
+      <h2 id="loomaNimi"></h2>
+      <div id="pilt" class="loom">🐱</div>
+
+      <div class="rida">
+        Kõhutäis: <span id="toitArv"></span>%
+        <progress id="toit" max="100"></progress>
+      </div>
+
+      <div class="rida">
+        Tuju: <span id="tujuArv"></span>%
+        <progress id="tuju" max="100"></progress>
+      </div>
+
+      <div class="rida">
+        Energia: <span id="energiaArv"></span>%
+        <progress id="energia" max="100"></progress>
+      </div>
+
+      <button onclick="toida()">🍎 Toida</button>
+      <button onclick="mangi()">🎾 Mängi</button>
+      <button onclick="maga()">💤 Maga</button>
+
+      <p id="teade"></p>
+
+      <button onclick="uusMang()">🔄 Uus mäng</button>
+    </div>
+  </div>
+
+  <script>
+    let loom = "kass";
+    let nimi = "";
+    let toit = 70;
+    let tuju = 70;
+    let energia = 70;
+
+    function vali(uusLoom) {
+      loom = uusLoom;
+      document.getElementById("valik").textContent =
+        "Valitud: " + loom;
+    }
+
+    function alusta() {
+      nimi = document.getElementById("nimi").value.trim();
+
+      if (nimi === "") {
+        alert("Pane loomale nimi!");
+        return;
+      }
+
+      document.getElementById("algus").classList.add("peidetud");
+      document.getElementById("mang").classList.remove("peidetud");
+
+      uuenda();
+    }
+
+    function uuenda() {
+      document.getElementById("loomaNimi").textContent = nimi;
+      document.getElementById("pilt").textContent =
+        loom === "kass" ? "🐱" : "🐶";
+
+      document.getElementById("toit").value = toit;
+      document.getElementById("tuju").value = tuju;
+      document.getElementById("energia").value = energia;
+
+      document.getElementById("toitArv").textContent = toit;
+      document.getElementById("tujuArv").textContent = tuju;
+      document.getElementById("energiaArv").textContent = energia;
+
+      localStorage.setItem("minuLoom", JSON.stringify({
+        loom: loom,
+        nimi: nimi,
+        toit: toit,
+        tuju: tuju,
+        energia: energia
+      }));
+    }
+
+    function teata(tekst) {
+      document.getElementById("teade").textContent = tekst;
+    }
+
+    function toida() {
+      toit = Math.min(100, toit + 20);
+      teata(nimi + " sai süüa! 🍎");
+      uuenda();
+    }
+
+    function mangi() {
+      if (energia < 15 || toit < 10) {
+        teata("Loom on liiga väsinud või näljane!");
+        return;
+      }
+
+      tuju = Math.min(100, tuju + 20);
+      energia = Math.max(0, energia - 15);
+      toit = Math.max(0, toit - 10);
+
+      teata(nimi + " mängis rõõmsalt! 🎾");
+      uuenda();
+    }
+
+    function maga() {
+      energia = Math.min(100, energia + 30);
+      toit = Math.max(0, toit - 5);
+
+      teata(nimi + " magas hästi! 💤");
+      uuenda();
+    }
+
+    function uusMang() {
+      localStorage.removeItem("minuLoom");
+      location.reload();
+    }
+
+    // Laadime varem salvestatud mängu
+    try {
+      const salvestus = JSON.parse(
+        localStorage.getItem("minuLoom")
+      );
+
+      if (salvestus && salvestus.nimi) {
+        loom = salvestus.loom;
+        nimi = salvestus.nimi;
+        toit = salvestus.toit;
+        tuju = salvestus.tuju;
+        energia = salvestus.energia;
+
+        document.getElementById("algus")
+          .classList.add("peidetud");
+        document.getElementById("mang")
+          .classList.remove("peidetud");
+
+        uuenda();
+      }
+    } catch (viga) {
+      localStorage.removeItem("minuLoom");
+    }
+  </script>
+</body>
+</html>
