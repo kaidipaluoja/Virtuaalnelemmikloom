@@ -1,0 +1,38 @@
+
+name: Automaatne tegevuslogi
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  logi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Laadi projekt
+        uses: actions/checkout@v4
+
+      - name: Kirjuta tegevus logisse
+        env:
+          SONUM: ${{ github.event.head_commit.message }}
+          AUTOR: ${{ github.actor }}
+        run: |
+          echo "" >> logi.md
+          echo "## $(date -u +'%d.%m.%Y %H:%M UTC')" >> logi.md
+          echo "Autor: $AUTOR" >> logi.md
+          echo "Tegevus: ${SONUM%%$'\n'*}" >> logi.md
+
+      - name: Salvesta logi GitHubi
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logi.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Automaatne logi uuendamine"
+            git push
+          fi
